@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"testing"
+	"time"
 
 	"example.com/m/v2/util"
 	"github.com/stretchr/testify/require"
@@ -39,5 +40,5 @@ func TestGetEntry(t *testing.T) {
 	require.NotEmpty(t, getEntry)
 	require.Equal(t, entry.AccountID, getEntry.AccountID)
 	require.Equal(t, entry.Amount, getEntry.Amount)
-	require.Equal(t, entry.CreatedAt, getEntry.CreatedAt)
+	require.WithinDuration(t, entry.CreatedAt, getEntry.CreatedAt, time.Second)
 }

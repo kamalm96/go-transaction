@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -12,6 +13,7 @@ func TestTransferTx(t *testing.T) {
 
 	account1 := createRandomAccount(t)
 	account2 := createRandomAccount(t)
+	fmt.Println(">> Before:", account1.Balance, account2.Balance)
 
 	n := 5
 	amount := int64(10)
@@ -102,5 +104,6 @@ func TestTransferTx(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, account1.Balance-int64(n)*amount, updatedAccount1.Balance)
 	require.Equal(t, account2.Balance+int64(n)*amount, updatedAccount2.Balance)
+	fmt.Println(">> AFTER:", account1.Balance, account2.Balance)
 
 }
